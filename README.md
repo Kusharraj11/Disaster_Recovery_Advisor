@@ -1,4 +1,10 @@
 ﻿# Disaster_Recovery_Advisor
+ # 👋 Author Introduction
+
+I am **Kushar Raj Kashyap**, a final-year Master of Computer Applications (MCA) student at **Haldia Institute of Technology**, West Bengal. This project, **Disaster Recovery Advisor**, was developed as part of my major project submission for the 4th semester (2024–2025), under the guidance of **Ms. Kankana Datta**, Assistant Professor, Department of Computer Applications.
+
+---
+
 # 🌍 Disaster Recovery Advisor
 
 An AI/ML-powered project designed to predict natural disasters and assist in efficient post-disaster recovery planning using intelligent resource allocation and recommendation systems.
