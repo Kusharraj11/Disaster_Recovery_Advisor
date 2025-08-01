@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "username": "user1",
+      "password": "password1",
+      "email": "user1@example.com",
+      "type": "general"
+    },
+    {
+      "username": "ngo1",
+      "password": "password1",
+      "email": "ngo1@example.com",
+      "type": "ngo_gov",
+      "organization": "Red Cross"
+    },
+    {
+      "username": "ananya",
+      "password": "evil3407",
+      "email": "ananna@gmail.com",
+      "type": "ngo_gov",
+      "organization": "kutta"
+    },
+    {
+      "username": "govind",
+      "password": "scrypt:32768:8:1$C231BIiB5Z3P4UX7$3fa1b6b77ab6949d55e3e761e0b65af062a3b8eda1225a2bafff2c8a14e8bb46060a341df979f87fd0449b132c61f6fe5f93386d0279b23722bfc60ef8260af6",
+      "email": "govindakr8271@gmail.com",
+      "type": "general"
+    },
+    {
+      "username": "bihargovt",
+      "password": "scrypt:32768:8:1$VZ6Ts4Oww95zQ1G5$4f3d2faa9b9e6353c2b5370785f18dd23071f10fbd76953244ad0d90809d73a6821c724ad38cc52408c44b5c4f7597d0ebe7a7b5906437547695e78edee184e2",
+      "email": "bihargovt@bihar.com",
+      "type": "ngo_gov",
+      "organization": "Bihar flood"
+    },
+    {
+      "username": "AyushKumar",
+      "password": "scrypt:32768:8:1$cK0ES7sJyVIXgE7w$5e51788284d60609524aa77b80f2f1b1a4fdaf909a88f7fee5072642c90308f76f0e2201800f43b0ed33b3fb46f26cfaa990200b4b469d123035363d8e746f5c",
+      "email": "ayush242001@gmail.com",
+      "type": "ngo_gov",
+      "organization": "Ngo"
+    }
+  ]
+}

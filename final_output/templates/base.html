@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0F172A;
+            --accent-teal: #2DD4BF;
+            --accent-purple: #A78BFA;
+            --neutral-700: #334155;
+            --neutral-400: #94A3B8;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: #F8FAFC;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 480px;
+            overflow: hidden;
+        }
+
+        .auth-header {
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-purple));
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .auth-header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .auth-body {
+            padding: 2.5rem 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--neutral-400);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.5rem;
+            color: #F8FAFC;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-purple));
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(45, 212, 191, 0.15);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--neutral-400);
+        }
+
+        .auth-link {
+            color: var(--accent-teal);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .auth-link:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-teal);
+        }
+
+        .user-type-toggle {
+            display: flex;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+        }
+
+        .user-type-btn {
+            flex: 1;
+            padding: 0.75rem;
+            text-align: center;
+            cursor: pointer;
+            background: transparent;
+            color: var(--neutral-400);
+            transition: all 0.3s ease;
+        }
+
+        .user-type-btn.active {
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-purple));
+            color: white;
+        }
+
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 1rem;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #FECACA;
+        }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #BBF7D0;
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .auth-card {
+                border-radius: 1rem;
+            }
+            
+            .auth-header, .auth-body {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <i class="fas {% if category == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}"></i>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script>
+        // Toggle user type buttons
+        document.querySelectorAll('.user-type-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.user-type-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelector('input[name="user_type"]').value = this.dataset.value;
+                
+                // Toggle organization field
+                const orgField = document.getElementById('org-field');
+                if (this.dataset.value === 'ngo_gov') {
+                    orgField.style.display = 'block';
+                    orgField.querySelector('input').required = true;
+                } else {
+                    orgField.style.display = 'none';
+                    orgField.querySelector('input').required = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

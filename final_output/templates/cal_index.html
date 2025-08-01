@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRASTIC - Disaster Relief Assistance System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+    
+        body {
+            background-color: #0F172A;
+            color: #F8FAFC;
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+    
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+    
+        h1 {
+            background: linear-gradient(135deg, #2DD4BF 0%, #A78BFA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+    
+        .section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+    
+        .section:hover {
+            transform: translateY(-3px);
+        }
+    
+        .section-title {
+            margin: 0 0 1.5rem 0;
+            color: #2DD4BF;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+    
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #2DD4BF 0%, #A78BFA 100%);
+        }
+    
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #A78BFA;
+            font-weight: 500;
+        }
+    
+        input, select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #F8FAFC;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    
+        input:focus, select:focus {
+            outline: none;
+            border-color: #2DD4BF;
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
+        }
+    
+        button {
+            background: linear-gradient(135deg, #2DD4BF 0%, #A78BFA 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+    
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(45, 212, 191, 0.3);
+        }
+    
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 12px;
+            display: none;
+        }
+    
+        .item-list {
+            margin-bottom: 1.5rem;
+        }
+    
+        .item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+    
+        .add-btn {
+            background: linear-gradient(135deg, #27AE60 0%, #2ECC71 100%);
+            margin-bottom: 1rem;
+        }
+    
+        .remove-btn {
+            background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+        }
+    
+        .saved-calculations {
+            margin-top: 2rem;
+        }
+    
+        .calculation-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+    
+        .calculation-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+    
+        #personnel-list .item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+    
+        #personnel-list .personnel-role {
+            flex: 2;
+            min-width: 200px;
+        }
+    
+        #personnel-list .personnel-number,
+        #personnel-list .personnel-pay-rate {
+            flex: 1;
+            min-width: 100px;
+        }
+    
+        #personnel-list .personnel-volunteer {
+            flex: 1;
+            min-width: 120px;
+        }
+    
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+    
+            .container {
+                padding: 1.5rem;
+            }
+    
+            .item {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+    
+            #personnel-list .personnel-role {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('predict') }}">Disaster Prediction</a>
+            <div class="d-flex align-items-center">
+                <a href="{{ url_for('resource_planner') }}" class="btn btn-outline-info me-3">
+                    <i class="fas fa-boxes"></i> Resource Planner
+                </a>
+                <span class="navbar-text me-3">
+                    <i class="fas fa-user-circle me-2"></i>{{ username }} ({{ user_type }})
+                </span>
+                <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>DRASTIC - Disaster Relief Assistance System</h1>
+        
+        <div class="section">
+            <h2 class="section-title">Disaster Information</h2>
+            <div class="form-group">
+                <label for="disaster-name">Disaster Name</label>
+                <input type="text" id="disaster-name" placeholder="E.g., Hurricane Katrina">
+            </div>
+            <div class="form-group">
+                <label for="disaster-type">Disaster Type</label>
+                <select id="disaster-type">
+                    <option value="Tornado">Tornado</option>
+                    <option value="Hurricane">Hurricane</option>
+                    <option value="Earthquake">Earthquake</option>
+                    <option value="Flood">Flood</option>
+                    <option value="Wildfire">Wildfire</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="E.g., New Orleans, LA">
+            </div>
+            <div class="form-group">
+                <label for="affected-population">Affected Population</label>
+                <input type="number" id="affected-population" placeholder="Estimated number of affected people">
+            </div>
+            <div class="form-group">
+                <label for="duration-days">Expected Duration (days)</label>
+                <input type="number" id="duration-days" placeholder="How long the disaster will last">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Resources</h2>
+            <button class="add-btn" id="add-resource">Add Resource</button>
+            <div class="item-list" id="resource-list">
+                <!-- Resources will be added here -->
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Personnel</h2>
+            <button class="add-btn" id="add-personnel">Add Personnel</button>
+            <div class="item-list" id="personnel-list">
+                <!-- Personnel will be added here -->
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Transportation</h2>
+            <button class="add-btn" id="add-transportation">Add Transportation</button>
+            <div class="item-list" id="transportation-list">
+                <!-- Transportation will be added here -->
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <button id="calculate-btn">Calculate Relief Effort</button>
+            <button id="save-btn">Save Calculation</button>
+        </div>
+        
+        <div class="result" id="result">
+            <h2 class="section-title">Calculation Results</h2>
+            <div id="result-content"></div>
+        </div>
+        
+        <div class="section saved-calculations">
+            <h2 class="section-title">Saved Calculations</h2>
+            <div id="saved-calculations-list">
+                <!-- Saved calculations will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add resource
+        document.getElementById('add-resource').addEventListener('click', function() {
+            const resourceList = document.getElementById('resource-list');
+            const resourceItem = document.createElement('div');
+            resourceItem.className = 'item';
+            resourceItem.innerHTML = `
+                <input type="text" class="resource-name" placeholder="Resource name (e.g., Food)">
+                <input type="number" class="resource-quantity" placeholder="Quantity">
+                <input type="number" class="resource-weight" placeholder="Weight per unit (kg)">
+                <input type="number" class="resource-perishability" placeholder="Perishability (days)">
+                <button class="remove-btn">Remove</button>
+            `;
+            resourceList.appendChild(resourceItem);
+            
+            // Add remove functionality
+            resourceItem.querySelector('.remove-btn').addEventListener('click', function() {
+                resourceList.removeChild(resourceItem);
+            });
+        });
+        
+        // Add personnel
+        document.getElementById('add-personnel').addEventListener('click', function() {
+            const personnelList = document.getElementById('personnel-list');
+            const personnelItem = document.createElement('div');
+            personnelItem.className = 'item';
+            personnelItem.innerHTML = `
+                <input type="text" class="personnel-role" placeholder="Role (e.g., Doctor)">
+                <input type="number" class="personnel-number" placeholder="Number">
+                <input type="number" class="personnel-pay-rate" placeholder="Pay rate ($/day)">
+                <select class="personnel-volunteer">
+                    <option value="false">Paid</option>
+                    <option value="true">Volunteer</option>
+                </select>
+                <button class="remove-btn">Remove</button>
+            `;
+            personnelList.appendChild(personnelItem);
+            
+            // Add remove functionality
+            personnelItem.querySelector('.remove-btn').addEventListener('click', function() {
+                personnelList.removeChild(personnelItem);
+            });
+        });
+        
+        // Add transportation
+        document.getElementById('add-transportation').addEventListener('click', function() {
+            const transportationList = document.getElementById('transportation-list');
+            const transportationItem = document.createElement('div');
+            transportationItem.className = 'item';
+            transportationItem.innerHTML = `
+                <input type="text" class="transportation-type" placeholder="Type (e.g., Truck)">
+                <input type="number" class="transportation-capacity" placeholder="Capacity (kg)">
+                <input type="number" class="transportation-cost" placeholder="Cost per km ($)">
+                <input type="number" class="transportation-availability" placeholder="Number available">
+                <button class="remove-btn">Remove</button>
+            `;
+            transportationList.appendChild(transportationItem);
+            
+            // Add remove functionality
+            transportationItem.querySelector('.remove-btn').addEventListener('click', function() {
+                transportationList.removeChild(transportationItem);
+            });
+        });
+        
+        // Calculate button
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            // Gather disaster info
+            const disasterInfo = {
+                name: document.getElementById('disaster-name').value,
+                type: document.getElementById('disaster-type').value,
+                location: document.getElementById('location').value,
+                affected_population: parseInt(document.getElementById('affected-population').value) || 0,
+                duration_days: parseInt(document.getElementById('duration-days').value) || 0
+            };
+            
+            // Gather resources
+            const resources = [];
+            document.querySelectorAll('#resource-list .item').forEach(item => {
+                resources.push({
+                    name: item.querySelector('.resource-name').value,
+                    quantity: parseInt(item.querySelector('.resource-quantity').value) || 0,
+                    weight: parseFloat(item.querySelector('.resource-weight').value) || 0,
+                    perishability: parseInt(item.querySelector('.resource-perishability').value) || 0
+                });
+            });
+            
+            // Gather personnel
+            const personnel = [];
+            document.querySelectorAll('#personnel-list .item').forEach(item => {
+                personnel.push({
+                    role: item.querySelector('.personnel-role').value,
+                    number: parseInt(item.querySelector('.personnel-number').value) || 0,
+                    pay_rate: parseFloat(item.querySelector('.personnel-pay-rate').value) || 0,
+                    volunteer: item.querySelector('.personnel-volunteer').value === 'true'
+                });
+            });
+            
+            // Gather transportation
+            const transportation = [];
+            document.querySelectorAll('#transportation-list .item').forEach(item => {
+                transportation.push({
+                    type: item.querySelector('.transportation-type').value,
+                    capacity: parseFloat(item.querySelector('.transportation-capacity').value) || 0,
+                    cost_per_km: parseFloat(item.querySelector('.transportation-cost').value) || 0,
+                    availability: parseInt(item.querySelector('.transportation-availability').value) || 0
+                });
+            });
+            
+            // Prepare data to send
+            const data = {
+                ...disasterInfo,
+                resources,
+                personnel,
+                transportation
+            };
+            
+            // Send to server
+            fetch('/calculate_aid', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display results
+                const resultDiv = document.getElementById('result');
+                const resultContent = document.getElementById('result-content');
+                
+                if (data.error) {
+                    resultContent.innerHTML = `<p style="color: red;">Error: ${data.error}</p>`;
+                } else {
+                    resultContent.innerHTML = `
+                        <h3>Disaster: ${data.disaster_name}</h3>
+                        <p><strong>Success Score:</strong> ${data.success_score}/100</p>
+                        <p><strong>Estimated Cost:</strong> $${data.estimated_cost.toLocaleString()}</p>
+                        <p><strong>Resources Needed:</strong> ${data.resources_needed}</p>
+                        <p><strong>Personnel Needed:</strong> ${data.personnel_needed}</p>
+                    `;
+                }
+                
+                resultDiv.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result-content').innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+                document.getElementById('result').style.display = 'block';
+            });
+        });
+        
+        // Save button
+        document.getElementById('save-btn').addEventListener('click', function() {
+            const disasterName = document.getElementById('disaster-name').value;
+            const disasterType = document.getElementById('disaster-type').value;
+            const location = document.getElementById('location').value;
+            
+            if (!disasterName || !disasterType || !location) {
+                alert('Please fill in the basic disaster information before saving.');
+                return;
+            }
+            
+            // Get the current result data
+            const resultContent = document.getElementById('result-content').innerHTML;
+            if (!resultContent || resultContent.includes('Error')) {
+                alert('Please calculate the relief effort before saving.');
+                return;
+            }
+            
+            // Gather all data to save
+            const saveData = {
+                name: `${disasterName} / ${location} : ${new Date().toLocaleDateString('en-US', {month: '2-digit', day: '2-digit', year: '2-digit'})}`,
+                calculation: {
+                    type: disasterType,
+                    location: location,
+                    affected_population: parseInt(document.getElementById('affected-population').value) || 0,
+                    duration_days: parseInt(document.getElementById('duration-days').value) || 0,
+                    resources: [],
+                    personnel: [],
+                    transportation: []
+                }
+            };
+            
+            // Add resources
+            document.querySelectorAll('#resource-list .item').forEach(item => {
+                saveData.calculation.resources.push({
+                    name: item.querySelector('.resource-name').value,
+                    quantity: parseInt(item.querySelector('.resource-quantity').value) || 0,
+                    weight: parseFloat(item.querySelector('.resource-weight').value) || 0,
+                    perishability: parseInt(item.querySelector('.resource-perishability').value) || 0
+                });
+            });
+            
+            // Add personnel
+            document.querySelectorAll('#personnel-list .item').forEach(item => {
+                saveData.calculation.personnel.push({
+                    role: item.querySelector('.personnel-role').value,
+                    number: parseInt(item.querySelector('.personnel-number').value) || 0,
+                    pay_rate: parseFloat(item.querySelector('.personnel-pay-rate').value) || 0,
+                    volunteer: item.querySelector('.personnel-volunteer').value === 'true'
+                });
+            });
+            
+            // Add transportation
+            document.querySelectorAll('#transportation-list .item').forEach(item => {
+                saveData.calculation.transportation.push({
+                    type: item.querySelector('.transportation-type').value,
+                    capacity: parseFloat(item.querySelector('.transportation-capacity').value) || 0,
+                    cost_per_km: parseFloat(item.querySelector('.transportation-cost').value) || 0,
+                    availability: parseInt(item.querySelector('.transportation-availability').value) || 0
+                });
+            });
+            
+            // Send to server
+            fetch('/save_calculation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(saveData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(`Save failed: ${data.error}`);
+                } else {
+                    alert(`Calculation saved successfully as "${data.saved_name}"`);
+                    loadSavedCalculations();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Save failed: ' + error.message);
+            });
+        });
+        
+        // Load saved calculations
+        function loadSavedCalculations() {
+            fetch('/load_calculations')
+            .then(response => response.json())
+            .then(data => {
+                const savedList = document.getElementById('saved-calculations-list');
+                savedList.innerHTML = '';
+                
+                if (data.error) {
+                    savedList.innerHTML = `<p style="color: red;">${data.error}</p>`;
+                    return;
+                }
+                
+                if (Object.keys(data).length === 0) {
+                    savedList.innerHTML = '<p>No saved calculations found.</p>';
+                    return;
+                }
+                
+                for (const [name, calc] of Object.entries(data)) {
+                    const calcItem = document.createElement('div');
+                    calcItem.className = 'calculation-item';
+                    calcItem.innerHTML = `
+                        <h3>${name}</h3>
+                        <p><strong>Type:</strong> ${calc.type}</p>
+                        <p><strong>Location:</strong> ${calc.location}</p>
+                        <p><strong>Affected Population:</strong> ${calc.affected_population}</p>
+                    `;
+                    
+                    calcItem.addEventListener('click', function() {
+                        loadCalculation(name, calc);
+                    });
+                    
+                    savedList.appendChild(calcItem);
+                }
+            })
+            .catch(error => {
+                console.error('Error loading saved calculations:', error);
+                document.getElementById('saved-calculations-list').innerHTML = 
+                    '<p style="color: red;">Error loading saved calculations.</p>';
+            });
+        }
+        
+        // Load a specific calculation
+        function loadCalculation(name, calculation) {
+            // Set basic info
+            document.getElementById('disaster-name').value = name.split(' / ')[0];
+            document.getElementById('disaster-type').value = calculation.type;
+            document.getElementById('location').value = calculation.location.split(' : ')[0];
+            document.getElementById('affected-population').value = calculation.affected_population;
+            document.getElementById('duration-days').value = calculation.duration_days;
+            
+            // Clear existing items
+            document.getElementById('resource-list').innerHTML = '';
+            document.getElementById('personnel-list').innerHTML = '';
+            document.getElementById('transportation-list').innerHTML = '';
+            
+            // Add resources
+            calculation.resources.forEach(res => {
+                const resourceList = document.getElementById('resource-list');
+                const resourceItem = document.createElement('div');
+                resourceItem.className = 'item';
+                resourceItem.innerHTML = `
+                    <input type="text" class="resource-name" value="${res.name}">
+                    <input type="number" class="resource-quantity" value="${res.quantity}">
+                    <input type="number" class="resource-weight" value="${res.weight}">
+                    <input type="number" class="resource-perishability" value="${res.perishability}">
+                    <button class="remove-btn">Remove</button>
+                `;
+                resourceList.appendChild(resourceItem);
+                
+                // Add remove functionality
+                resourceItem.querySelector('.remove-btn').addEventListener('click', function() {
+                    resourceList.removeChild(resourceItem);
+                });
+            });
+            
+            // Add personnel
+            calculation.personnel.forEach(pers => {
+                const personnelList = document.getElementById('personnel-list');
+                const personnelItem = document.createElement('div');
+                personnelItem.className = 'item';
+                personnelItem.innerHTML = `
+                    <input type="text" class="personnel-role" value="${pers.role}">
+                    <input type="number" class="personnel-number" value="${pers.number}">
+                    <input type="number" class="personnel-pay-rate" value="${pers.pay_rate}">
+                    <select class="personnel-volunteer">
+                        <option value="false" ${!pers.volunteer ? 'selected' : ''}>Paid</option>
+                        <option value="true" ${pers.volunteer ? 'selected' : ''}>Volunteer</option>
+                    </select>
+                    <button class="remove-btn">Remove</button>
+                `;
+                personnelList.appendChild(personnelItem);
+                
+                // Add remove functionality
+                personnelItem.querySelector('.remove-btn').addEventListener('click', function() {
+                    personnelList.removeChild(personnelItem);
+                });
+            });
+            
+            // Add transportation
+            calculation.transportation.forEach(trans => {
+                const transportationList = document.getElementById('transportation-list');
+                const transportationItem = document.createElement('div');
+                transportationItem.className = 'item';
+                transportationItem.innerHTML = `
+                    <input type="text" class="transportation-type" value="${trans.type}">
+                    <input type="number" class="transportation-capacity" value="${trans.capacity}">
+                    <input type="number" class="transportation-cost" value="${trans.cost_per_km}">
+                    <input type="number" class="transportation-availability" value="${trans.availability}">
+                    <button class="remove-btn">Remove</button>
+                `;
+                transportationList.appendChild(transportationItem);
+                
+                // Add remove functionality
+                transportationItem.querySelector('.remove-btn').addEventListener('click', function() {
+                    transportationList.removeChild(transportationItem);
+                });
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Load saved calculations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedCalculations();
+            
+            // Add initial resource item
+            document.getElementById('add-resource').click();
+            
+            // Add initial personnel item
+            document.getElementById('add-personnel').click();
+            
+            // Add initial transportation item
+            document.getElementById('add-transportation').click();
+        });
+    </script>
+</body>
+</html>
