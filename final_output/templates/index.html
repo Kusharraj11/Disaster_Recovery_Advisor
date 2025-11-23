@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-card">
+    {% if not session.username %}
+        <div class="auth-header">
+            <h1>Disaster Recovery Advisor</h1>
+            <h2><i>Predict. Prepare. Protect</i></h2>
+            <p>Please login or sign up to continue</p>
+        </div>
+        <div class="auth-body">
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <a href="{{ url_for('login') }}" class="btn">Login</a>
+                <a href="{{ url_for('signup') }}" class="btn" style="background: rgb(9, 56, 76);">Sign Up</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="auth-header">
+            <h1>Welcome back, {{ session.username }}!</h1>
+            <p>You are already logged in</p>
+        </div>
+        <div class="auth-body">
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <a href="{{ url_for('predict') }}" class="btn">Go to Predictions</a>
+                <a href="{{ url_for('logout') }}" class="btn" style="background: #dc3545;">Logout</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

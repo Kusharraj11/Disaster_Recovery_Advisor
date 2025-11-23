@@ -1,0 +1,56 @@
+{
+  "users": [
+    {
+      "username": "user1",
+      "password": "password1",
+      "email": "user1@example.com",
+      "type": "general"
+    },
+    {
+      "username": "ngo1",
+      "password": "password1",
+      "email": "ngo1@example.com",
+      "type": "ngo_gov",
+      "organization": "Red Cross"
+    },
+    {
+      "username": "ananya",
+      "password": "evil3407",
+      "email": "ananna@gmail.com",
+      "type": "ngo_gov",
+      "organization": "kutta"
+    },
+    {
+      "username": "govind",
+      "password": "scrypt:32768:8:1$C231BIiB5Z3P4UX7$3fa1b6b77ab6949d55e3e761e0b65af062a3b8eda1225a2bafff2c8a14e8bb46060a341df979f87fd0449b132c61f6fe5f93386d0279b23722bfc60ef8260af6",
+      "email": "govindakr8271@gmail.com",
+      "type": "general"
+    },
+    {
+      "username": "bihargovt",
+      "password": "scrypt:32768:8:1$VZ6Ts4Oww95zQ1G5$4f3d2faa9b9e6353c2b5370785f18dd23071f10fbd76953244ad0d90809d73a6821c724ad38cc52408c44b5c4f7597d0ebe7a7b5906437547695e78edee184e2",
+      "email": "bihargovt@bihar.com",
+      "type": "ngo_gov",
+      "organization": "Bihar flood"
+    },
+    {
+      "username": "shivam",
+      "password": "scrypt:32768:8:1$COyunre0PB9zdrqa$a9deda762c029b30a96e2f425f30c0e31c11129c0244a4e01b3265de96b87d828b2e5f0f63055ca30a2471764969e222863b0bceb2ab7ccf63bb078aee8573d7",
+      "email": "yodha8825@gmail.com",
+      "type": "general"
+    },
+    {
+      "username": "white_rose",
+      "password": "scrypt:32768:8:1$LQxO6PhSM9XMwuG8$428ef1ef8b0c3ac9f1703b65d2b367d8def31bbc1c20196831700d40d2954deeb42a24f52c725d53e88b0702c6d942358281745ff200acc5f02bf9aced2d0816",
+      "email": "shivam@gmail.com",
+      "type": "general"
+    },
+    {
+      "username": "whiterose",
+      "password": "scrypt:32768:8:1$GDANtR2bV9ZmjH6C$62e81c7ff656c0a21aef237ccbd7ecce47b6b9594ae59ff579b75e8a10fc8827c23fd9594536af5504922a110072823bdacc948082f86d763b28dd94a9c2553a",
+      "email": "sk@gmail.com",
+      "type": "ngo_gov",
+      "organization": "sks"
+    }
+  ]
+}

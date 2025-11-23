@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "username": "user1",
+      "password": "password1",
+      "email": "user1@example.com",
+      "type": "general"
+    },
+    {
+      "username": "ngo1",
+      "password": "password1",
+      "email": "ngo1@example.com",
+      "type": "ngo_gov",
+      "organization": "Red Cross"
+    },
+    {
+      "username": "pes1pg23ca047",
+      "password": "evil3407",
+      "email": "govindakr8271@gmail.com",
+      "type": "ngo_gov",
+      "organization": "trtre"
+    }
+  ]
+}

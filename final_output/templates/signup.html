@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if session.username %}
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>Already Logged In</h1>
+            <p>You are already logged in as {{ session.username }}</p>
+        </div>
+        <div class="auth-body">
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <a href="{{ url_for('predict') }}" class="btn">Go to Predictions</a>
+                <a href="{{ url_for('logout') }}" class="btn" style="background: #dc3545;">Logout</a>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>Create Account</h1>
+        </div>
+        
+        <div class="auth-body">
+            <form method="POST">
+                <input type="hidden" name="user_type" value="general">
+                
+                <div class="user-type-toggle">
+                    <div class="user-type-btn active" data-value="general">
+                        General Public
+                    </div>
+                    <div class="user-type-btn" data-value="ngo_gov">
+                        NGO/Gov
+                    </div>
+                </div>
+                
+                {% if error %}
+                <div class="alert alert-error">
+                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                </div>
+                {% endif %}
+                
+                {% if success %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> {{ success }}
+                </div>
+                {% endif %}
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Choose a username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Your email address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Create a password" required>
+                </div>
+                
+                <div class="form-group" id="org-field" style="display: none;">
+                    <label for="organization">Organization Name</label>
+                    <input type="text" id="organization" name="organization" class="form-control" placeholder="Your organization name">
+                </div>
+                
+                <button type="submit" class="btn">
+                    Create Account <i class="fas fa-user-plus"></i>
+                </button>
+                
+                <div class="auth-footer">
+                    Already have an account? <a href="{{ url_for('login') }}" class="auth-link">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,62 @@
+{
+  "Hurrician / Bengaluru : 04/05/25": {
+    "type": "Flood",
+    "location": "Bengaluru",
+    "affected_population": 20000,
+    "duration_days": 10,
+    "resources": [
+      {
+        "name": "Food",
+        "quantity": 10000000,
+        "weight": 1,
+        "perishability": 30
+      }
+    ],
+    "personnel": [
+      {
+        "role": "",
+        "number": 0,
+        "pay_rate": 0,
+        "volunteer": false
+      }
+    ],
+    "transportation": [
+      {
+        "type": "Truck",
+        "capacity": 50,
+        "cost_per_km": 2,
+        "availability": 30
+      }
+    ]
+  },
+  "Hurrician / bengulru : 04/05/25": {
+    "type": "Tornado",
+    "location": "bengulru",
+    "affected_population": 2000,
+    "duration_days": 10,
+    "resources": [
+      {
+        "name": "Food",
+        "quantity": 2000,
+        "weight": 1,
+        "perishability": 10
+      }
+    ],
+    "personnel": [
+      {
+        "role": "Doctor",
+        "number": 10,
+        "pay_rate": 5,
+        "volunteer": false
+      }
+    ],
+    "transportation": [
+      {
+        "type": "Truck",
+        "capacity": 50,
+        "cost_per_km": 2,
+        "availability": 20
+      }
+    ]
+  }
+}

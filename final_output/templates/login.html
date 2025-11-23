@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if session.username %}
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>Already Logged In</h1>
+            <p>You are already logged in as {{ session.username }}</p>
+        </div>
+        <div class="auth-body">
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <a href="{{ url_for('predict') }}" class="btn">Go to Predictions</a>
+                <a href="{{ url_for('logout') }}" class="btn" style="background: #dc3545;">Logout</a>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>Welcome Back</h1>
+            <p>Login to access your account</p>
+        </div>
+        
+        <div class="auth-body">
+            <form method="POST">
+                <input type="hidden" name="user_type" value="general">
+                
+                <div class="user-type-toggle">
+                    <div class="user-type-btn active" data-value="general">
+                        General Public
+                    </div>
+                    <div class="user-type-btn" data-value="ngo_gov">
+                        NGO/Gov
+                    </div>
+                </div>
+                
+                {% if error %}
+                <div class="alert alert-error">
+                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                </div>
+                {% endif %}
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="btn">
+                    Login <i class="fas fa-arrow-right"></i>
+                </button>
+                
+                <div class="auth-footer">
+                    Don't have an account? <a href="{{ url_for('signup') }}" class="auth-link">Sign up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
