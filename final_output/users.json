@@ -34,6 +34,7 @@
       "organization": "Bihar flood"
     },
     {
+<<<<<<< HEAD
       "username": "shivam",
       "password": "scrypt:32768:8:1$COyunre0PB9zdrqa$a9deda762c029b30a96e2f425f30c0e31c11129c0244a4e01b3265de96b87d828b2e5f0f63055ca30a2471764969e222863b0bceb2ab7ccf63bb078aee8573d7",
       "email": "yodha8825@gmail.com",
@@ -51,6 +52,13 @@
       "email": "sk@gmail.com",
       "type": "ngo_gov",
       "organization": "sks"
+=======
+      "username": "AyushKumar",
+      "password": "scrypt:32768:8:1$cK0ES7sJyVIXgE7w$5e51788284d60609524aa77b80f2f1b1a4fdaf909a88f7fee5072642c90308f76f0e2201800f43b0ed33b3fb46f26cfaa990200b4b469d123035363d8e746f5c",
+      "email": "ayush242001@gmail.com",
+      "type": "ngo_gov",
+      "organization": "Ngo"
+>>>>>>> 7725df86c74f7a10bf29668a2d6ff2b1b9f579ba
     }
   ]
 }
