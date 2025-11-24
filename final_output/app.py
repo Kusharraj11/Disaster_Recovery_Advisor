@@ -80,7 +80,7 @@ DISASTER_MAPPING = {
 REVERSE_DISASTER_MAPPING = {v: k for k, v in DISASTER_MAPPING.items()}
 
 # Resource planner data
-CALCULATIONS_FILE = r'C:\Users\Shivam\Downloads\final_year_project\Anaya_final_year_project\final_output\calculations.json'
+CALCULATIONS_FILE = r'Z:\Disaster Recovery Advisor\final_output\calculations.json'
 
 def load_calculations():
     try:
@@ -95,9 +95,9 @@ def save_calculations(calculations):
 
 # Load models
 try:
-    with open(r"C:\Users\Shivam\Downloads\final_year_project\Anaya_final_year_project\final_output\disaster_model.pkl", "rb") as f:
+    with open(r"Z:\Disaster Recovery Advisor\final_output\disaster_model.pkl", "rb") as f:
         model = pickle.load(f)
-    with open(r"C:\Users\Shivam\Downloads\final_year_project\Anaya_final_year_project\final_output\more_info.pkl", "rb") as f:
+    with open(r"Z:\Disaster Recovery Advisor\final_output\more_info.pkl", "rb") as f:
         additional_model = pickle.load(f)
 except Exception as e:
     print(f"Error loading models: {e}")
